@@ -7,15 +7,15 @@
 from __future__ import unicode_literals
 
 import unittest
-import pycoreutils
 
-from pycoreutils.test import BaseTestCase
+from . import BaseTestCase
 
 
 class TestCase(BaseTestCase):
-    def test_getcommand(self):
-        for cmd in pycoreutils.command.__all__:
-            pycoreutils.getcommand(cmd[4:])
+    def test_basename(self):
+        self.assertEqual(
+            self.runcommandline('basename foo/bar/biz')[0],
+            'biz\n')
 
 
 if __name__ == '__main__':

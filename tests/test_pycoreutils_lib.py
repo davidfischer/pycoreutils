@@ -10,7 +10,7 @@ import unittest
 
 import pycoreutils
 import pycoreutils.lib
-from pycoreutils.test import BaseTestCase
+from . import BaseTestCase
 
 
 class TestCase(BaseTestCase):

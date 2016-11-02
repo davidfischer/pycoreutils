@@ -5,7 +5,6 @@
 # See LICENSE.txt for details.
 
 from __future__ import print_function, unicode_literals
-import doctest
 import filecmp
 import os
 import os.path
@@ -126,22 +125,4 @@ class BaseTestCase(unittest.TestCase):
                 os.rmdir(os.path.join(root, name))
         os.rmdir(self.workdir)
 
-
-def getalltests():
-    '''
-    Return a testsuite containing all tests in unittests and doctests
-    '''
-    # Create testsuite containing all tests in pycoreutils.test
-    testsuite = unittest.TestLoader().discover('pycoreutils.test')
-
-    # Add pycoreutils doctests to testsuite
-    testsuite.addTests(doctest.DocTestSuite(pycoreutils))
-
-    return testsuite
-
-
-def runalltests(verbosity=2):
-    '''
-    Run all test found by getalltests()
-    '''
-    unittest.TextTestRunner(verbosity=verbosity).run(getalltests())
+\

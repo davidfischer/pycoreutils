@@ -11,7 +11,7 @@ import stat
 import time
 import unittest
 
-from pycoreutils.test import BaseTestCase
+from . import BaseTestCase
 
 
 class TestCase(BaseTestCase):

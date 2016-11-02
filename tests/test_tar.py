@@ -10,7 +10,7 @@ import tarfile
 import unittest
 
 from pycoreutils import StdErrException
-from pycoreutils.test import BaseTestCase
+from . import BaseTestCase
 
 
 class TestCase(BaseTestCase):

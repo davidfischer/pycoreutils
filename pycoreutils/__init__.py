@@ -228,7 +228,7 @@ def runcommandline(commandline):
 
     :param commandline: String representing the commandline, i.e. "ls -l /tmp"
     '''
-    return run(shlex.split(str(commandline)))
+    return run(shlex.split(commandline))
 
 
 if __name__ == '__main__':

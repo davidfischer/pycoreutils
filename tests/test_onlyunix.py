@@ -5,7 +5,7 @@
 # See LICENSE.txt for details.
 
 from __future__ import unicode_literals
-from pycoreutils.test import BaseTestCase
+from . import BaseTestCase
 import os
 import pycoreutils
 import unittest
