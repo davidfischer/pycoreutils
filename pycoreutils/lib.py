@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Copyright (c) 2009, 2010, 2011 Hans van Leeuwen.
-# See LICENSE.txt for details.
-
 '''
 This module contains various helper-functions for pycoreutils.command
 '''
