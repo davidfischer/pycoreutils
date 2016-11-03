@@ -1,5 +1,5 @@
-Python Coreutils (PyCorutils)
-=============================
+Python Coreutils (PyCoreutils)
+==============================
 
 
 PyCoreutils is a pure Python implementation of standard UNIX commands
