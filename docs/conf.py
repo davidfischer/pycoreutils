@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'PyCoreutils'
-copyright = u'2009, 2010, 2011 Hans van Leeuwen'
+copyright = u'2009-2016 {} contributors'.format(project)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

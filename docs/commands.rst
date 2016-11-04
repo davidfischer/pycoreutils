@@ -1,0 +1,4 @@
+Commands
+========
+
+.. Include automatic documentation
