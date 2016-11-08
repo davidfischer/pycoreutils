@@ -14,6 +14,14 @@ The codeline is well tested. To run the tests, use::
 Ensure that any code is compatible with Python 2.7 and 3.3+
 
 
+Code style
+----------
+
+The code follows PEP8 with exemptions specified in ``setup.cfg``::
+
+    $ flake8 pycoreutils tests
+
+
 Generating the documentation
 ----------------------------
 
