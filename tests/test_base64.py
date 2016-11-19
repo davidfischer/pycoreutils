@@ -4,7 +4,7 @@ import io
 import sys
 import unittest
 
-from pycoreutils.command._base64 import encode, decode
+from pycoreutils.command._base64.utils import encode, decode
 
 
 class TestBase64(unittest.TestCase):

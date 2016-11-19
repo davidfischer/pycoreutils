@@ -1,6 +1,3 @@
-from __future__ import print_function, unicode_literals
-
-import argparse
 import base64
 import binascii
 import functools
@@ -8,7 +5,7 @@ import re
 import sys
 import textwrap
 
-from ..vendor import six
+from ...vendor import six
 
 
 COMMAND_NAME = 'base64'
@@ -16,29 +13,6 @@ COMMAND_NAME = 'base64'
 # Because every 3 bytes map to 4 base64 bytes, the buffer should be
 #  a multiple of 3. Conveniently, this is also a multiple of 4 for decoding
 BUFSIZE = 3 * 1024
-
-
-def setup(subparsers):
-    p = subparsers.add_parser(
-        COMMAND_NAME,
-        description='Base64 encode or decode FILE or standard input, to standard output',
-        help='Base64 encode or decode input',
-        usage='{} [options] [args]'.format(COMMAND_NAME),
-    )
-    p.add_argument('fd', metavar='FILE', nargs='?', type=argparse.FileType('rb'),
-                   default=sys.stdin, help='a file to base64 encode or decode')
-    p.add_argument('-d', '--decode', action='store_true', dest='decode', help='decode data')
-    p.add_argument('-w', dest='wrap', default=76, type=int,
-                   help='wrap encoded lines after COLS character (default %(default)s). '
-                        'Use 0 to disable line wrapping')
-    p.set_defaults(func=main)
-
-
-def main(args):
-    if args.decode:
-        return decode(args.fd)
-    else:
-        return encode(args.fd, args.wrap)
 
 
 def _validated_b64decode(b64_buffer):

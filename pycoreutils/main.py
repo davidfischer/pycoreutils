@@ -27,10 +27,10 @@ def main():
 
     # For each subcommand, import the module and setup its argument/option
     # parser with argparse
-    for command in commands:
-        mod = importlib.import_module(u'pycoreutils.command._{}'.format(command))
-        if hasattr(mod, 'setup'):
-            getattr(mod, 'setup')(subparsers)
+    for command_name in commands:
+        mod = importlib.import_module(u'pycoreutils.command._{}'.format(command_name))
+        if hasattr(mod, 'Command'):
+            getattr(mod, 'Command').setup(subparsers)
 
     if len(sys.argv) == 1:
         # Handle the case where no arguments or options are passed
