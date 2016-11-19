@@ -46,7 +46,7 @@ setup(
     scripts=['scripts/pycoreutils'],
     packages=[
         'pycoreutils',
-        'pycoreutils.command',
+        'pycoreutils.commands',
     ],
     tests_require=['nose'],
     test_suite='nose.collector',

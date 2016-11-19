@@ -2,7 +2,7 @@ import argparse
 import importlib
 import sys
 
-from .command import commands
+from .commands import commands
 
 
 description = '''
@@ -28,7 +28,7 @@ def main():
     # For each subcommand, import the module and setup its argument/option
     # parser with argparse
     for command_name in commands:
-        mod = importlib.import_module(u'pycoreutils.command._{}'.format(command_name))
+        mod = importlib.import_module(u'pycoreutils.commands._{}'.format(command_name))
         if hasattr(mod, 'Command'):
             getattr(mod, 'Command').setup(subparsers)
 
