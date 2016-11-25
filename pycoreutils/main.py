@@ -3,6 +3,7 @@ import importlib
 import sys
 
 from .commands import commands
+from .version import __version__
 
 
 description = '''
@@ -23,7 +24,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         usage='%(prog)s [-h] COMMAND [args]',
     )
-    subparsers = parser.add_subparsers(title='Commands', metavar='')
+    parser.add_argument('-v', '--version', action='version', help='Show PyCoreutils version and exit', version='%(prog)s {}'.format(__version__))
+    subparsers = parser.add_subparsers(
+        title='Commands',
+        metavar='',
+    )
 
     # For each subcommand, import the module and setup its argument/option
     # parser with argparse
@@ -32,7 +37,7 @@ def main():
         if hasattr(mod, 'Command'):
             getattr(mod, 'Command').setup(subparsers)
 
-    if len(sys.argv) == 1:
+    if len(sys.argv) <= 1:
         # Handle the case where no arguments or options are passed
         parser.print_help()
         parser.exit()
@@ -41,4 +46,5 @@ def main():
 
     # If a subcommand was requested, call the appropriate subcommand's
     # main method
-    sys.exit(args.func(args))
+    if args.func:
+        sys.exit(args.func(args))

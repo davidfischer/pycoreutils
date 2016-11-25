@@ -8,6 +8,4 @@ See LICENSE.txt for details.
 '''
 
 from .main import main    # noqa
-
-
-__version__ = '0.1.0a1'
+from .version import __version__  # noqa
