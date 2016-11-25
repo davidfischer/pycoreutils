@@ -8,7 +8,7 @@ from codecs import open
 from setuptools import setup
 
 
-with open('pycoreutils/__init__.py', 'r', 'utf-8') as fd:
+with open('pycoreutils/version.py', 'r', 'utf-8') as fd:
     version = re.search(
         r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
         fd.read(),

@@ -35,7 +35,7 @@ def main():
     for command_name in commands:
         mod = importlib.import_module(u'pycoreutils.commands._{}'.format(command_name))
         if hasattr(mod, 'Command'):
-            getattr(mod, 'Command').setup(subparsers)
+            getattr(mod, 'Command')(subparsers)
 
     if len(sys.argv) <= 1:
         # Handle the case where no arguments or options are passed
