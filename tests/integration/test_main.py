@@ -13,7 +13,7 @@ class TestMain(BaseIntegrationTest):
         # Based on changes in argparse
         # the version goes to stdout in 3.4+ and stderr in 2.x and 3.3
         status, stdout, stderr = self._call_pycoreutils(['--version'])
-        if sys.version_info <= (3, 3):
+        if sys.version_info < (3, 4):
             self.assertTrue(stderr.startswith(b'pycoreutils v'), stderr)
         else:
             self.assertTrue(stdout.startswith(b'pycoreutils v'), stdout)
