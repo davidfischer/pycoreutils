@@ -24,7 +24,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         usage='%(prog)s [-h] COMMAND [args]',
     )
-    parser.add_argument('-v', '--version', action='version', help='Show PyCoreutils version and exit', version='%(prog)s {}'.format(__version__))
+    parser.add_argument('-v', '--version', action='version', help='Show PyCoreutils version and exit', version='%(prog)s v{}'.format(__version__))
     subparsers = parser.add_subparsers(
         title='Commands',
         metavar='',
