@@ -22,7 +22,7 @@ class PycoreutilsMulticommand(click.MultiCommand):
 
 @click.command(
     cls=PycoreutilsMulticommand,
-    epilog='See "%(prog)s COMMAND -h" to read about a specific subcommand',
+    epilog='See "COMMAND -h" to read about a specific subcommand',
     short_help='%(prog)s [-h] COMMAND [args]',
 )
 @click.help_option('-h', '--help')
