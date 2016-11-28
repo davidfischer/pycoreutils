@@ -43,7 +43,10 @@ setup(
     url='http://pypi.python.org/pypi/pycoreutils',
     author='Hans van Leeuwen',
     author_email='hansvl@gmail.com',
-    scripts=['scripts/pycoreutils'],
+    entry_points='''
+        [console_scripts]
+        pycoreutils=main:cli
+    ''',
     packages=[
         'pycoreutils',
         'pycoreutils.commands',

@@ -1,36 +1,32 @@
-from __future__ import print_function, unicode_literals
+import os
 
-import sys
-
-from ..base import BaseCommand
+from ...vendor import click
 
 
-class Command(BaseCommand):
-    name = 'basename'
-    description = 'Print NAME with any leading directory components removed.'
-    help_text = 'Remove leading directory from names'
-    usage = '{} [options] NAME [NAME2]...'.format(name)
+@click.command(
+    help='Print NAME with any leading directory components removed.',
+    short_help='Remove leading directory from names',
+)
+@click.help_option('-h', '--help')
+@click.option('-a', '--multiple', is_flag=True, help='For compatibility only')
+@click.option('-z', '--zero', is_flag=True, default=False, help='end each output line with NUL, not newline')
+@click.option('-s', '--suffix', metavar='SUFFIX', help='remove a trailing SUFFIX as well')
+@click.option('--separator', metavar='SEPARATOR', help='the directory separator [default: "{}"]'.format(os.sep), default=os.sep)
+@click.argument('names', metavar='NAME', nargs=-1)
+def subcommand(multiple, zero, suffix, separator, names):
+    # This command differs from its GNU alternative in that -a is always assumed
+    # --separator is non-standard as well but handy on Windows especially
+    line_ending = '\n'
+    if zero:
+        line_ending = '\0'
 
-    def setup(self):
-        # This command differs from its GNU alternative in that -a is assumed
-        self.parser.add_argument('-z', '--zero', action='store_true', dest='zero', help='end each output line with NUL, not newline')
-        self.parser.add_argument('-s', '--suffix', dest='suffix', help='remove a trailing SUFFIX as well', default='')
-        self.parser.add_argument('names', metavar='NAME', nargs='+')
-        self.parser.set_defaults(func=self.run)
+    for n in names:
+        click.echo(u'{}{}'.format(get_base_name(n, suffix, separator), line_ending), nl=False)
 
-    def run(self, args):
-        line_ending = '\n'
-        if args.zero:
-            line_ending = '\0'
 
-        for name in args.names:
-            sys.stdout.write('{}{}'.format(self.get_base_name(name, args.suffix), line_ending))
+def get_base_name(name, suffix, separator):
+    base_name = name.split(separator)[-1]
+    if suffix and base_name.endswith(suffix):
+        base_name = base_name[:-len(suffix)]
 
-        return 0
-
-    def get_base_name(self, name, suffix):
-        base_name = name.split('/')[-1]
-        if base_name.endswith(suffix) and len(suffix) > 0:
-            base_name = base_name[:-len(suffix)]
-
-        return base_name
+    return base_name

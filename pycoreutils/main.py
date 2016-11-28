@@ -1,50 +1,40 @@
-import argparse
 import importlib
-import sys
 
 from .commands import commands
+from .vendor import click
 from .version import __version__
 
 
-description = '''
-Coreutils in Pure Python
+class PycoreutilsMulticommand(click.MultiCommand):
+    def list_commands(self, ctx):
+        return commands
 
- ____  _  _  ___  _____  ____  ____  __  __  ____  ____  __    ___
-(  _ \( \/ )/ __)(  _  )(  _ \( ___)(  )(  )(_  _)(_  _)(  )  / __)
- )___/ \  /( (__  )(_)(  )   / )__)  )(__)(   )(   _)(_  )(__ \__ \\
-(__)   (__) \___)(_____)(_)\_)(____)(______) (__) (____)(____)(___/
-'''.strip()
+    def get_command(self, ctx, name):
+        try:
+            mod = importlib.import_module(u'pycoreutils.commands._{}'.format(name))
+            if hasattr(mod, 'subcommand'):
+                return getattr(mod, 'subcommand')
+        except ImportError:
+            pass
+
+        return None
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        argument_default='-h',
-        description=description,
-        epilog='See "%(prog)s COMMAND -h" to read about a specific subcommand',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        usage='%(prog)s [-h] COMMAND [args]',
-    )
-    parser.add_argument('-v', '--version', action='version', help='Show PyCoreutils version and exit', version='%(prog)s v{}'.format(__version__))
-    subparsers = parser.add_subparsers(
-        title='Commands',
-        metavar='',
-    )
+@click.command(
+    cls=PycoreutilsMulticommand,
+    epilog='See "%(prog)s COMMAND -h" to read about a specific subcommand',
+    short_help='%(prog)s [-h] COMMAND [args]',
+)
+@click.help_option('-h', '--help')
+@click.version_option(__version__, '-v', '--version', message='%(prog)s v%(version)s')
+def cli():
+    '''
+    Coreutils in Pure Python
 
-    # For each subcommand, import the module and setup its argument/option
-    # parser with argparse
-    for command_name in commands:
-        mod = importlib.import_module(u'pycoreutils.commands._{}'.format(command_name))
-        if hasattr(mod, 'Command'):
-            getattr(mod, 'Command')(subparsers)
-
-    if len(sys.argv) <= 1:
-        # Handle the case where no arguments or options are passed
-        parser.print_help()
-        parser.exit()
-
-    args = parser.parse_args()
-
-    # If a subcommand was requested, call the appropriate subcommand's
-    # main method
-    if args.func:
-        sys.exit(args.func(args))
+    \b
+     ____  _  _  ___  _____  ____  ____  __  __  ____  ____  __    ___
+    (  _ \( \/ )/ __)(  _  )(  _ \( ___)(  )(  )(_  _)(_  _)(  )  / __)
+     )___/ \  /( (__  )(_)(  )   / )__)  )(__)(   )(   _)(_  )(__ \__ \\
+    (__)   (__) \___)(_____)(_)\_)(____)(______) (__) (____)(____)(___/
+    '''
+    pass

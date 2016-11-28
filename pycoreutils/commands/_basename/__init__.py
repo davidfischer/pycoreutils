@@ -1,1 +1,1 @@
-from .command import Command  # noqa
+from .command import subcommand  # noqa

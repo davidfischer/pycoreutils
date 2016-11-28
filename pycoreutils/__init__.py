@@ -7,5 +7,5 @@ Copyright (c) 2009 - 2016 Hans van Leeuwen, David Fischer & contributors
 See LICENSE.txt for details.
 '''
 
-from .main import main    # noqa
+from .main import cli    # noqa
 from .version import __version__  # noqa
