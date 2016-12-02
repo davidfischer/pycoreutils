@@ -1,11 +1,7 @@
-import re
 import sys
 
 from ..hasher import HasherCommand
 from ...vendor import click
-
-
-checksum_line_regex = re.compile(b'^(?P<checksum>[a-f0-9]{40})  (?P<filepath>.+)$')
 
 
 @click.command(
