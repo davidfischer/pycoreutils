@@ -1,5 +1,3 @@
-import functools
-import hashlib
 import os
 import signal
 import stat
@@ -115,11 +113,3 @@ def mode2string(mode):
         s += '-'
 
     return s
-
-
-def hasher(algorithm, fd):
-    def myhash(args):
-        h = hashlib.new(algorithm)
-        for data in iter(functools.partial(fd.read, 4096), b''):
-            h.update(data)
-        return h.hexdigest()
