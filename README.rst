@@ -25,11 +25,7 @@ Usage
 Installation
 ------------
 
-To install PyCoreutils, simply:
-
-.. code-block:: bash
-
-    $ pip install pycoreutils
+Coming soon to a PyPI near you...
 
 
 Documentation
